@@ -31,7 +31,7 @@ class Oled:public U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C{
             uint8_t *type;
             int nowtime=millis();
             int start_x=0;
-            int xlen;
+            int xlen=0;
             int xtmp;
             int start_y=10;
         };
@@ -58,6 +58,9 @@ class Oled:public U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C{
             clearBuffer();
             for(int a=0;a<text_num;a++){
                 setFont(text_inf[a].type);
+                if(text_inf[a].xlen==0){
+                    text_inf[a].xlen=getStrWidth(text_inf[a].text.c_str());
+                }
                 if(millis()-text_inf[a].nowtime>scroll_time){
                     text_inf[a].nowtime=millis();
                     if(text_inf[a].xlen>width){
@@ -87,7 +90,7 @@ class Oled:public U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C{
             }
             tmp[text_num].text=t;
             tmp[text_num].start_x=start_x;
-            tmp[text_num].xlen=t.length()*6;
+            //tmp[text_num].xlen=t.length()*6;
             tmp[text_num].xtmp=0;
             tmp[text_num].start_y=start_y;
             tmp[text_num].type=const_cast<uint8_t*>(ty);
