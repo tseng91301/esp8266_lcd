@@ -28,6 +28,12 @@ void fillarray(String *instrarr,String instr,char divide_c){
         }
     }
 }
+bool range(int in,int m_in,int M_in=-1){
+    if(M_in==-1){
+        return(in>=m_in);
+    }
+    return(in<M_in&&in>=m_in);
+}
 String trimstr(String strin,int start_l,int end_l){
     String strout="";
     for(int a=start_l;a<end_l;a++){
