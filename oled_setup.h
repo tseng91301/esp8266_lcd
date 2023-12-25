@@ -54,29 +54,30 @@ class Oled:public U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C{
             delete[] text_inf;
             data_init();
         }
-        void show(){
-            clearBuffer();
-            for(int a=0;a<text_num;a++){
-                setFont(text_inf[a].type);
-                if(text_inf[a].xlen==0){
-                    text_inf[a].xlen=getStrWidth(text_inf[a].text.c_str());
-                }
-                if(millis()-text_inf[a].nowtime>scroll_time){
-                    text_inf[a].nowtime=millis();
-                    if(text_inf[a].xlen>width){
-                        Serial.println("aaa");
-                        if(text_inf[a].xlen+text_inf[a].xtmp-(width-10)<=0){
-                            Serial.println("=0");
-                            text_inf[a].xtmp=0;
-                        }else{
-                            Serial.println("-1");
-                            text_inf[a].xtmp-=1;
+        void show(int delaytime=1){
+            int tn=millis();
+            while(millis()-tn<delaytime){
+                clearBuffer();
+                for(int a=0;a<text_num;a++){
+                    setFont(text_inf[a].type);
+                    if(text_inf[a].xlen==0){
+                        text_inf[a].xlen=getStrWidth(text_inf[a].text.c_str());
+                    }
+                    if(millis()-text_inf[a].nowtime>scroll_time){
+                        text_inf[a].nowtime=millis();
+                        if(text_inf[a].xlen>width){
+                            if(text_inf[a].xlen+text_inf[a].xtmp-(width-10)<=0){
+                                text_inf[a].xtmp=0;
+                            }else{
+                                text_inf[a].xtmp-=1;
+                            }
                         }
                     }
+                    drawStr(text_inf[a].xtmp,text_inf[a].start_y,text_inf[a].text.c_str());
+                    sendBuffer();
+                    delay(1);
                 }
-                drawStr(text_inf[a].xtmp,text_inf[a].start_y,text_inf[a].text.c_str());
             }
-            sendBuffer();
         }
         void pic(const unsigned char input_pic[],int start_x=0,int start_y=0){
             clearBuffer();                    // clear the internal memory
