@@ -1,10 +1,7 @@
-#include "bottom_func.h"
-#include "oled_setup.h"
-#include "touch_button.h"
-#include "oled_pic.h"
+#include "src/bottom_func.h"
+#include "src/oled_setup.h"
 
 Oled oled1;
-//TouchButton touch1(D3,1);
 
 int shorttimedelay=170;
 int timedelay1=2000;

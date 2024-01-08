@@ -7,6 +7,9 @@
 #include <Wire.h>
 #endif
 
+#ifndef SELFMAKE_OLED_SETUP
+#define SELFMAKE_OLED_SETUP 1
+
 
 class Oled:public U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C{
     private:
@@ -117,3 +120,5 @@ class Oled:public U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C{
             delete[] text_inf;
         }
 };
+
+#endif

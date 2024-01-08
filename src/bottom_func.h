@@ -1,3 +1,6 @@
+#ifndef SELFMAKE_BOTTOM_FUNC
+#define SELFMAKE_BOTTOM_FUNC 1
+
 int charnum(String strin,char search_w){
     //Serial.println("charnum");
     int num=0;
@@ -41,3 +44,4 @@ String trimstr(String strin,int start_l,int end_l){
     }
     return(strout);
 }
+#endif
